@@ -9,11 +9,11 @@ function setup() {
 function draw() {
     background(50, 100, 200)
 
-    drawCircle()
+    drawEllipse()
 
 }
 
-function drawCircle() {
+function drawEllipse() {
     push()
     noStroke()
     fill(200, 180, 100)
