@@ -3,33 +3,19 @@
 function setup() {
     console.log("go")
     createCanvas(600, 600)
-
-}
-
-function draw() {
     background(50, 100, 200)
 
-    drawCircle()
+    drawEllipse(20, 20, 20, 200, 180, 100)
+    drawEllipse(50, 50, 40, 200, 50, 150)
+    drawEllipse(100, 100, 80, 125, 200, 50)
 
 }
 
-function drawCircle() {
+function drawEllipse(x, y, size, r, g, b) {
     push()
     noStroke()
-    fill(200, 180, 100)
-    ellipse(20, 20, 20)
-    pop()
-
-    push()
-    noStroke()
-    fill(200, 50, 150)
-    ellipse(50, 50, 40)
-    pop()
-
-    push()
-    noStroke()
-    fill(125, 200, 50)
-    ellipse(100, 100, 80)
+    fill(r, g, b)
+    ellipse(x, y, size)
     pop()
 
 }
