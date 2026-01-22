@@ -75,40 +75,40 @@ function setup() {
     /*************************************** */
     /* 1: Select the first paragraph and replace the text within the paragraph... */
     /***CODE */
-    let firstParagraph = document.querySelector("p")
-    firstParagraph.textContent = "New text in paragraph one: text changed by `your name` on the following date: `today's date`." + new Date() + "."
+    // let firstParagraph = document.querySelector("p")
+    // firstParagraph.textContent = "New text in paragraph one: text changed by `your name` on the following date: `today's date`." + new Date() + "."
     /*************************************** */
     /* 2: Select all elements in the HTML that have the class name content-container
      and change the background color ... of first and second ...*/
     /***CODE */
-    let contentContainers = document.querySelectorAll(".content-container")
-    contentContainers[0].style.background = "orange"
-    contentContainers[1].style.background = "purple"
+    // let contentContainers = document.querySelectorAll(".content-container")
+    // contentContainers[0].style.background = "orange"
+    // contentContainers[1].style.background = "purple"
     /*************************************** */
     /* 3: Change the src element of the first image element on the page to be ...
     /***CODE */
-    let firstImage = document.querySelector("img")
-    firstImage.src = "task-2-images/seven.png"
+    // let firstImage = document.querySelector("img")
+    // firstImage.src = "task-2-images/seven.png"
     /*************************************** */
     /* 4: Select the third paragraph element on the page and 
     replace the content (within the paragraph) to be an h2 element which contains the text `TEST 123`
     /***CODE */
-    let thirdParagraph = document.querySelectorAll("p")[2]
-    thirdParagraph.innerHTML = "<h2>TEST 123</h2>"
+    // let thirdParagraph = document.querySelectorAll("p")[2]
+    // thirdParagraph.innerHTML = "<h2>TEST 123</h2>"
 
     /*************************************** */
     /* 5: Select the fourth paragraph element on the page and 
     add to the existing content an h2 element containing the text `TEST 123`
     /***CODE */
-    let fourthParagraph = document.querySelectorAll("p")[3]
-    fourthParagraph.innerHTML += "<h2>TEST 123</h2>"
+    // let fourthParagraph = document.querySelectorAll("p")[3]
+    // fourthParagraph.innerHTML += "<h2>TEST 123</h2>"
     /*************************************** */
     /* 6: Select the fifth paragraph element on the page and add to the existing content 
     an img element that holds `one.png`, and add the class newStyle to said paragraph element.
     /***CODE */
-    let fifthParagraph = document.querySelectorAll("p")[4]
-    fifthParagraph.innerHTML += '<img class="newStyle" src="task-2-images/one.png">'
-    fifthParagraph.classList.add("newStyle")
+    // let fifthParagraph = document.querySelectorAll("p")[4]
+    // fifthParagraph.innerHTML += '<img class="newStyle" src="task-2-images/one.png">'
+    // fifthParagraph.classList.add("newStyle")
 
     /*************************************** */
     /* 7: Add the following array variable: let colors = ['red','blue','green','orange'];, 
@@ -118,11 +118,11 @@ function setup() {
     (i.e. colors[0] should be allocated to the first innerContainers element, colors[1] to the second, etc ...) 
     a background using that color.
     /***CODE */
-    let colors = ['red', 'blue', 'green', 'orange'];
-    let innerContainers = document.querySelectorAll(".inner-container")
-    for (let i = 0; i, colors.length; i++) {
-        innerContainers[i].style.backgroundColor = colors[i]
-    }
+    // let colors = ['red', 'blue', 'green', 'orange'];
+    // let innerContainers = document.querySelectorAll(".inner-container")
+    // for (let i = 0; i, colors.length; i++) {
+    //     innerContainers[i].style.backgroundColor = colors[i]
+    // }
 
 
     /*************************************** */
@@ -143,10 +143,20 @@ function setup() {
     /* 1H: Iterate through the allPTagsThree array and call customCreateElement(), 
     passing the current allPTagsThree element as the parent with each iteration.*/
     /***CODE */
+    let allPTagsThree = document.querySelectorAll("p")
 
-
+    function customCreateElement(parent) {
+        let newElement = document.createElement("p")
+        newElement.textContent = "using create Element"
+        newElement.style.background = "green"
+        newElement.style.color = "white"
+        parent.appendChild(newElement)
+    }
+    for (let i = 0; i < allPTagsThree.length; i++) {
+        customCreateElement(allPTagsThree[i])
+    }
     /***EXPLANATION::
-     * 
+     * We used a for loop to get the new element (using create Element) to appear in every paragraphs as well as the modifications we made, like the bg color and writing color.
      * 
      */
 
