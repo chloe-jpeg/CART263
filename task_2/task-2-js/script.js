@@ -181,10 +181,26 @@ function setup() {
         otherwise lat it have the content `ODD`.*/
 
     /***CODE */
+    function customNewBoxCreate(parent) {
+        let newDiv = document.createElement("div")
+        newDiv.classList.add("testDiv")
+        parent.appendChild(newDiv)
+        return newDiv
+    }
 
+    for (let i = 0; i < 10; i++) {
+        for (let j = 0; j < 10; j++) {
+            let parent = document.querySelector('#new-grid')
+            let returnDiv = customNewBoxCreate(parent)
+            returnDiv.style.left = (j * 50) + "px"
+            returnDiv.style.top = (i * 50) + "px"
+        }
+    }
+
+    console.log(document.querySelectorAll(".testDiv"))
 
     /***EXPLANATION::
-     * 
+     * We used a for loop to create a grid of box by saving the current returned element and confirming that everything worked with a console log
      * 
      */
 
