@@ -1,9 +1,9 @@
 window.onload = setup;
 function setup() {
 
-    let introSection = document.querySelectorAll(".mouseclick-active-section");
+    let selection = document.querySelectorAll(".mouseclick-active-section");
 
-    array.forEach(element => {
+    selection.forEach(element => {
 
         element.addEventListener("click", function (e) {
             //check if is inactive
