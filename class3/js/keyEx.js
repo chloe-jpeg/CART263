@@ -1,5 +1,14 @@
 let speedX = 5
 window.onload = function () {
+
+
+    window.setInterval(moveBoxB, 20);
+    function moveBoxB() {
+        document.getElementById("boxB").style.left =
+            parseInt(document.getElementById("boxB").style.left) + speedX + "px";
+    }
+
+
     window.addEventListener("keydown", function (event) {
         // document.querySelector("#textContainer").textContent += `${event.key} `;
 
@@ -14,7 +23,7 @@ window.onload = function () {
 
     window.addEventListener("keyup", function (event) {
         if (event.key === "Shift") {
-            document.getElementById("boxA").style.background = "rgb(112, 184, 226)";
+            document.getElementById("boxA").style.background = "rgb(108, 132, 146)";
         }
     })
 
