@@ -24,7 +24,46 @@ function setup_A() {
 
   function aniA(parentCanvas) {
     console.log("in ani-A -teamA");
+
+    // Start with a cleaner canvas
+    parentCanvas.innerHTML = "";
+
+    //canvas style
+    parentCanvas.style.display = "flex";
+    parentCanvas.style.justifyContent = "center";
+    parentCanvas.style.alignItems = "center";
+    parentCanvas.style.gap = "20px";
+
+    // circles
+    for (let i = 0; i < 5; i++) {
+      const circle = document.createElement("div");
+      circle.classList.add("TEAM_A_ANI_A_circle");
+
+      // circle sizes and style
+      const size = 40 + i * 10;
+      circle.style.width = size + "px";
+      circle.style.height = size + "px";
+      circle.style.borderRadius = "50%";
+      circle.style.backgroundColor = "#b8d8d8";
+      circle.style.transition = "all 0.6s ease";
+
+      // interactive click event
+      circle.addEventListener("click", function () {
+        const newSize = Math.random() * 60 + 30;
+        circle.style.width = newSize + "px";
+        circle.style.height = newSize + "px";
+
+        const colors = ["#a1baec", "#6ec5e5", "#2c5b75", "#515eea"];
+        circle.style.backgroundColor =
+          colors[Math.floor(Math.random() * colors.length)];
+      });
+
+      parentCanvas.appendChild(circle);
+    }
   }
+
+
+
 
 
   /****************ANI B ************************************ */
@@ -43,9 +82,32 @@ function setup_A() {
    * Do not change any code above or the HTML markup.
    * **/
 
+
   function aniB(parentCanvas) {
     console.log("in ani-B -teamA");
 
+    let container = document.createElement("div");
+    container.className = "TEAM_A_ANI_B_container";
+    parentCanvas.appendChild(container);
+
+    for (let i = 0; i < 20; i++) {
+      let circle = document.createElement("div");
+      circle.className = "TEAM_A_ANI_B_circle";
+
+      circle.addEventListener("mouseover", function () {
+        circle.style.backgroundColor = "#787ef8"; // soft lavender
+        circle.style.opacity = "1";
+        circle.style.transform = "scale(1.1)";
+      });
+
+      circle.addEventListener("mouseout", function () {
+        circle.style.backgroundColor = "#35f0f3"; // calm blue
+        circle.style.opacity = "1";
+        circle.style.transform = "scale(1)";
+      });
+
+      container.appendChild(circle);
+    }
   }
   /****************ANI C ************************************ */
   /** PUT ALL YOUR CODE FOR INTERACTIVE PATTERN C INSIDE HERE */
@@ -68,19 +130,82 @@ function setup_A() {
    */
 
   function aniC(parentCanvas) {
-    console.log("in ani-C -teamA");
+    console.log("in aniC -teamA");
+
+    //set background color  of canvas
+    parentCanvas.style.backgroundColor = "rgb(90, 155, 199)";
+    let randomWords = ["The", "quick", "brown", "fox", "jumps", "over", "the", "lazy", "dog"];
 
     /*** THIS IS THE CALLBACK FOR KEY DOWN (* DO NOT CHANGE THE NAME *..) */
     windowKeyDownRef = function (e) {
       //code for key down in here
       console.log(e);
-      console.log("a-down");
+      //add a new word when we press space
+      if (e.code === "ArrowUp") {
+        console.log("c-up arrow down");
+        let newWord = document.createElement("span");
+
+
+        //make new word bounce around canvas like a DVD logo
+        parentCanvas.appendChild(newWord);
+
+        let x = Math.random() * parentCanvas.clientWidth;
+        let y = Math.random() * parentCanvas.clientHeight;
+        let speedX = 1;
+        let speedY = 1;
+
+        function moveWords() {
+          x += speedX;
+          y += speedY;
+
+          // bounce on edges
+          if (x <= 0 || x + newWord.offsetWidth >= parentCanvas.clientWidth) {
+            speedX *= -1;
+          }
+
+          if (y <= 0 || y + newWord.offsetHeight >= parentCanvas.clientHeight) {
+            speedY *= -1;
+          }
+
+          newWord.style.left = x + "px";
+          newWord.style.top = y + "px";
+
+          requestAnimationFrame(moveWords);
+        }
+
+        moveWords();
+
+
+        //make words appear at random positions
+        newWord.style.position = "absolute";
+        newWord.style.left = Math.random() * parentCanvas.clientWidth + "px";
+        newWord.style.top = Math.random() * parentCanvas.clientHeight + "px";
+        //pick a random word from the array
+        let randomIndex = Math.floor(Math.random() * randomWords.length);
+
+
+
+        newWord.textContent = randomWords[randomIndex];
+        newWord.classList.add("TEAM_A_c-word");
+        parentCanvas.appendChild(newWord);
+      }
+      //remove a word when we press backspace
+      else if (e.code === "ArrowDown") {
+        console.log("c-down arrow down");
+        let words = document.querySelectorAll(".TEAM_A_c-word");
+        if (words.length !== 0) {
+          words[words.length - 1].remove();
+        }
+      }
     };
 
     /*** THIS IS THE CALLBACK FOR KEY UP (*DO NOT CHANGE THE NAME..) */
     windowKeyUpRef = function (e) {
-      console.log("a-up");
-      console.log(e);
+      //code for key down in here
+      if (e.code === "ArrowUp") {
+        console.log("up arrow up");
+        console.log("c-up arrow up");
+      }
     };
     //DO NOT REMOVE
     window.addEventListener("keydown", windowKeyDownRef);

@@ -17,7 +17,7 @@ header {
   margin: 0 auto;
   margin-top: 20px;
   color: rgba(246, 15, 142, 1.0);
-  /* color:#cdcaca; */
+  /* color: #cdcaca; */
   text-align: center;
   width: 90%;
   padding: 0;
@@ -31,7 +31,8 @@ header {
   margin-top: 20px;
   width: 90%;
   display: flex;
-  /* background:green; */
+  /* background: green; */
+  background: rgb(170, 201, 170);
   flex-wrap: wrap;
   justify-content: center;
 }
@@ -104,7 +105,36 @@ h5 {
   background: rgba(246, 15, 142, 1.0);
 }
 
-/*CSS TEAM H**/
+.TEAM_A_ANI_B_container {
+  display: grid;
+  grid-template-columns: repeat(5, 55px);
+  gap: 20px;
+  justify-content: center;
+  margin-top: 20px;
+  padding-right: 15px;
+}
+
+.TEAM_A_ANI_B_circle {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background-color: #bde0fe;
+  transition: all 1s ease;
+}
+
+.TEAM_A_c-word {
+  font-size: 20px;
+  color: rgb(35, 14, 121);
+  position: absolute;
+
+  background-color: rgb(189, 240, 255);
+  display: inline-block;
+  margin: 2px;
+  padding: 2px;
+  border-style: dotted;
+  border-color: rgb(52, 84, 181);
+  border-width: 4px;
+}
 
 .TEAM_H_box {
   width: max-content;
@@ -146,8 +176,7 @@ h5 {
 .TEAM_H_h_word {
   font-size: 16px;
   color: white;
-  /* position:absolute; */
-
+  position: absolute;
   background-color: rgba(228, 200, 208, .7);
   display: inline-block;
   margin: 2px;
