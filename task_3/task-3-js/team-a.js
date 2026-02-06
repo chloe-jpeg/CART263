@@ -104,5 +104,70 @@ function setup_A() {
    * **/
   function aniD(parentCanvas) {
     console.log("in ani-D -teamA");
+
+    let sampleColors = [
+      '#793ae5',
+      '#9FE2BF',
+      '#4682B4',
+      '#CCCCFF',
+      '#000080',
+      '#6495ED',
+      '#088F8F',
+      '#0F52BA',
+      '#0096FF',
+      '#1434A4',
+      '#00FFFF',
+      '#0047AB',
+      '#6082B6',
+      '#5D3FD3',
+    ];
+
+    let bounds = parentCanvas.getBoundingClientRect();
+
+    // create ellipse
+    let ellipse = document.createElement("div");
+    ellipse.classList.add("TEAM_A_cell_D");
+    parentCanvas.appendChild(ellipse);
+
+    let size = 10;       // initial size
+    let minSize = 10;    // minimum size
+    let speed = 1;       // growth speed
+    let dir = 1;         // 1 = growing, -1 = shrinking
+
+    ellipse.style.position = "absolute";
+    ellipse.style.left = `${bounds.width / 2}px`;
+    ellipse.style.top = `${bounds.height / 2}px`;
+    ellipse.style.transform = "translate(-50%, -50%)";
+    ellipse.style.width = size + "px";
+    ellipse.style.height = size + "px";
+    ellipse.style.borderRadius = "50%";
+
+    // start with a random color
+    ellipse.style.background =
+      sampleColors[Math.floor(Math.random() * sampleColors.length)];
+    ellipse.style.opacity = 1;
+
+    // Maximum size so the ellipse stays fully inside canvas
+    let maxSize = Math.min(bounds.width, bounds.height);
+
+    requestAnimationFrame(animate);
+
+    function animate() {
+      size += speed * dir;
+
+      // reverse direction if hitting edges
+      if (size >= maxSize || size <= minSize) {
+        dir *= -1; // flip direction
+
+        // pick a new random color on each pulse
+        ellipse.style.background =
+          sampleColors[Math.floor(Math.random() * sampleColors.length)];
+      }
+
+      ellipse.style.width = size + "px";
+      ellipse.style.height = size + "px";
+
+      requestAnimationFrame(animate);
+    }
   }
 }
