@@ -60,11 +60,13 @@ window.onload = function () {
 
         // add numFlowers at one time
         for (let i = 0; i < garden.numFlowers; i++) {
-            garden.flowers.push(createFlower());
+            let flower = new Flower();
+            garden.flowers.push(flower);
         }
 
         for (let i = 0; i < garden.flowers.length; i++) {
-            renderFlower(garden.flowers[i]);
+            garden.flowers[i].renderFlower();
+            // renderFlower(garden.flowers[i]);
 
         }
     }
