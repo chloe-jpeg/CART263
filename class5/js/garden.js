@@ -19,18 +19,12 @@ window.onload = function () {
             },
             skyDiv: document.createElement("div"),
         },
-        sun: {
-            sunColor: {
-                r: 240,
-                g: 206,
-                b: 83,
-            },
-            //the sun element
-            sunDiv: document.createElement("div"),
-        },
+
+
     };
 
     function createAndRenderTheGarden() {
+
         garden.sky.skyDiv.classList.add("sky");
         garden.sky.skyDiv.style.background = `rgb(
             ${garden.sky.skyColor.r},
@@ -39,14 +33,12 @@ window.onload = function () {
             )`;
         document.getElementsByTagName("main")[0].appendChild(garden.sky.skyDiv);
 
-        garden.sun.sunDiv.classList.add("sun");
-        garden.sun.sunDiv.style.background = `rgb(
-            ${garden.sun.sunColor.r},
-            ${garden.sun.sunColor.g},
-            ${garden.sun.sunColor.b}
-            )`;
-        //append to the SKY div
-        document.getElementsByClassName("sky")[0].appendChild(garden.sun.sunDiv);
+        let sun = new Sun(10, 10, { r: 240, g: 206, b: 83 })
+        sun.renderSun();
+
+        window.addEventListener("keydown", function handleKeyDown(event) {
+            sun.handleKeyDownInSun(event);
+        });
 
         //grass
         garden.grass.grassDiv.classList.add("grass");
@@ -60,7 +52,19 @@ window.onload = function () {
 
         // add numFlowers at one time
         for (let i = 0; i < garden.numFlowers; i++) {
-            let flower = new Flower();
+
+
+            let x = Math.random() * (window.innerWidth - 100);
+            let y = Math.random() * 120;
+            let size = Math.random() * 30 + 50;
+            let stemLength = Math.random() * 50 + 50;
+            let petalColor = {
+                r: parseInt(Math.random() * 155) + 100,
+                g: parseInt(Math.random() * 155) + 100,
+                b: parseInt(Math.random() * 155) + 100,
+            };
+
+            let flower = new Flower(x, y, size, stemLength, petalColor);
             garden.flowers.push(flower);
         }
 
