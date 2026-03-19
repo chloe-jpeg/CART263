@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="author" content="Chloé Guérin">
+    <meta name="copyright" content="Chloé Guérin, Student Project, 2026">
+    <meta charset="UTF-8">
+    <title>Art Timer</title>
+    <link rel="stylesheet" href="css/styles.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- START -->
+    <div id="startScreen" class="screen active">
+        <img id="startOverlay" src="media/sculpt.PNG" alt="">
+
+        <div class="startContent">
+            <h1>🎨 Museum Study Timer</h1>
+            <button id="enterBtn">Enter Gallery</button>
+        </div>
+    </div>
+
+    <!-- GALLERY -->
+    <div id="galleryScreen" class="screen">
+        <h2>Select a Painting</h2>
+        <div class="gallery">
+            <img class="art" src="media/starry_night.jpg" alt="Starry Night">
+            <img class="art" src="media/la_reverie.jpg" alt="La Rêverie">
+            <img class="art" src="media/nighthawks.jpg" alt="Nighthawks">
+            <img class="art" src="media/the_great_wave.jpg" alt="The Great Wave">
+        </div>
+    </div>
+
+    <!-- TIMER -->
+    <div id="timerScreen" class="screen">
+        <div id="paintingDisplay">
+            <img id="paintingImg">
+        </div>
+        <input id="timeInput" type="number" placeholder="Minutes" min="1">
+        <h2 id="timerText">00:00</h2>
+
+        <div class="timer-buttons">
+            <button id="startBtn">Start</button>
+            <button id="stopBtn">Stop</button>
+        </div>
+    </div>
+
+    <!-- END -->
+    <div id="endScreen" class="screen">
+        <h2>Session Complete 🎉</h2>
+        <div id="endPainting">
+            <img id="endImg">
+        </div>
+        <button id="backBtn">Back to Start</button>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+
+</html>
