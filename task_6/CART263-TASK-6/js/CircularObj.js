@@ -1,5 +1,7 @@
 class CircularObj {
   constructor(x, y, radius, f_color, s_color, context) {
+    this.vx = Math.random() * 4 - 2;
+    this.vy = Math.random() * 4 - 2;
     // We write instructions to set up a Flower here
     // Position and size information
     this.x = x;
@@ -13,8 +15,8 @@ class CircularObj {
   }
 
   display() {
-    this.context.fillStyle = this.fill_color; // change the color we are using
-    this.context.strokeStyle = this.stroke_color; // change the color we are using
+    this.context.fillStyle = this.fill_color;
+    this.context.strokeStyle = this.stroke_color;
     this.context.beginPath();
     this.context.arc(
       this.x,
@@ -31,8 +33,16 @@ class CircularObj {
   }
 
   update() {
-    //update circle
-    //this.x += 1;
-    //console.log("circle update");
+    this.x += this.vx;
+    this.y += this.vy;
+
+    // bounce off walls
+    if (this.x - this.radius <= 0 || this.x + this.radius >= this.context.canvas.width) {
+      this.vx *= -1;
+    }
+
+    if (this.y - this.radius <= 0 || this.y + this.radius >= this.context.canvas.height) {
+      this.vy *= -1;
+    }
   }
 }
