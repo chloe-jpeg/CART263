@@ -69,12 +69,30 @@ window.addEventListener("DOMContentLoaded", () => {
     scene.add(ambient);
 
     //spacecraft    
-    const rocketGeometry = new THREE.ConeGeometry(0.5, 2, 16);
-    const rocketMaterial = new THREE.MeshStandardMaterial({ color: 0xffffff });
+    const rocketGroup = new THREE.Group();
+    // body
+    const body = new THREE.Mesh(
+        new THREE.CylinderGeometry(0.4, 0.4, 3, 16),
+        new THREE.MeshStandardMaterial({ color: 0xffffff })
+    );
+    rocketGroup.add(body);
+    // nose
+    const nose = new THREE.Mesh(
+        new THREE.ConeGeometry(0.4, 1, 16),
+        new THREE.MeshStandardMaterial({ color: 0xff5555 })
+    );
+    nose.position.y = 2;
+    rocketGroup.add(nose);
+    // engine
+    const engine = new THREE.Mesh(
+        new THREE.CylinderGeometry(0.3, 0.3, 0.5, 16),
+        new THREE.MeshStandardMaterial({ color: 0x333333 })
+    );
+    engine.position.y = -1.75;
+    rocketGroup.add(engine);
+    rocketGroup.position.set(0, 0, 0);
 
-    const rocket = new THREE.Mesh(rocketGeometry, rocketMaterial);
-    scene.add(rocket);
-
+    scene.add(rocketGroup);
 
     //trajectory of the scpacecraft, matching the real Artemis II
     const curve = new THREE.CatmullRomCurve3([
@@ -110,12 +128,12 @@ window.addEventListener("DOMContentLoaded", () => {
 
         if (progress <= 1) {
             const position = curve.getPoint(progress);
-            rocket.position.copy(position);
+            rocketGroup.position.copy(position);
         }
 
-        const desiredPosition = rocket.position.clone().add(offset);
+        const desiredPosition = rocketGroup.position.clone().add(offset);
         camera.position.lerp(desiredPosition, 0.05);
-        camera.lookAt(rocket.position);
+        camera.lookAt(rocketGroup.position);
 
         let phase = "";
 
@@ -131,8 +149,12 @@ window.addEventListener("DOMContentLoaded", () => {
 
         phaseText.textContent = "Phase: " + phase;
 
-        const distance = rocket.position.length();
+        const distance = rocketGroup.position.length();
         distanceText.textContent = "Distance: " + Math.floor(distance * 1000) + " km";
+        const tangent = curve.getTangent(progress);
+        rocketGroup.lookAt(
+            rocketGroup.position.clone().add(tangent)
+        );
 
         renderer.render(scene, camera);
     }
