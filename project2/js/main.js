@@ -1,5 +1,7 @@
 import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.158/build/three.module.js';
+
 const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x000000);
 
 const camera = new THREE.PerspectiveCamera(
     75,
@@ -14,6 +16,15 @@ const renderer = new THREE.WebGLRenderer({
     canvas: document.getElementById("scene")
 });
 renderer.setSize(window.innerWidth, window.innerHeight);
+window.addEventListener('resize', () => {
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+
+    renderer.setSize(width, height);
+
+    camera.aspect = width / height;
+    camera.updateProjectionMatrix();
+});
 const earthGeometry = new THREE.SphereGeometry(5, 32, 32);
 const earthTexture = new THREE.TextureLoader().load('textures/earth.jpg');
 
@@ -42,6 +53,8 @@ scene.add(moon);
 const light = new THREE.PointLight(0xffffff, 2);
 light.position.set(10, 10, 10);
 scene.add(light);
+const ambient = new THREE.AmbientLight(0xffffff, 0.5);
+scene.add(ambient);
 
 //spacecraft    
 const rocketGeometry = new THREE.ConeGeometry(0.5, 2, 16);
@@ -68,15 +81,23 @@ function animate() {
     const position = curve.getPoint(progress % 1);
     rocket.position.copy(position);
 
-    camera.position.set(position.x + 5, position.y + 2, position.z + 5);
-    camera.lookAt(rocket.position);
+    camera.position.set(0, 15, 30);
+    camera.lookAt(0, 0, 0);
+
+    if (progress < 0.3) {
+        console.log("Launch phase");
+    } else if (progress < 0.7) {
+        console.log("Lunar flyby");
+    } else {
+        console.log("Return to Earth");
+    }
 
     renderer.render(scene, camera);
 }
 
 animate();
 
-
+//stars
 const starsGeometry = new THREE.BufferGeometry();
 const starsCount = 1000;
 
